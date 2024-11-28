@@ -270,7 +270,8 @@
 
     document.getElementById('adImages').addEventListener('change', function () {
         const newFiles = Array.from(this.files);
-
+        document.getElementById('adImages').value = '';
+        
         newFiles.forEach((file) => {
             if (!file.type.startsWith('image/')) {
                 alert(`Файл "${file.name}" не является изображением.`);
@@ -281,8 +282,6 @@
                 alert(`Вы можете загрузить не более ${maxImages} изображений.`);
                 return;
             }
-
-            document.getElementById('adImages').value = '';
 
             if (imageFiles.length < maxImages) {
                 imageFiles.push(file);
