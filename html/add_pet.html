@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <title>Добавление объявления</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script>
+        window.addEventListener('beforeunload', function (e) {
+            e.preventDefault();
+        });
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg px-3 sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="../index.html">
+                <img src="../media/svgs/logo.svg" alt="logo" class="me-2">
+                <span class="logo-text">GET PET BACK</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Главная</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.html">Личный кабинет</a></li>
+                    <li class="nav-item"><a class="nav-link disabled" href="add_pet.html">Добавить объявление</a></li>
+                    <li class="nav-item"><a class="nav-link" href="search.html">Поиск по объявлениям</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="py-5">
+        <div class="container">
+            <h3 class="text-center primary mt-5">Добавить объявление</h3>
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div class="card">
+                        <div class="card-header">Детали объявления</div>
+                        <div class="card-body">
+                            <form id="adForm">
+                                <!-- Имя -->
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Имя</label>
+                                    <input type="text" class="form-control" id="name"
+                                        placeholder="Введите имя (только кириллица, пробелы и дефисы)" required
+                                        pattern="^[А-Яа-яЁёА-Яа-я\- ]+$">
+                                    <div class="invalid-feedback">Используйте только кириллицу, пробелы и дефисы.</div>
+                                </div>
+                                <!-- Телефон -->
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Телефон</label>
+                                    <input type="text" class="form-control text-light border-light" id="phone"
+                                        placeholder="+7 (___) ___ __-__">
+                                    <div class="invalid-feedback">Используйте формат +7 (xxx) xxx xx-xx.</div>
+                                </div>
+                                <!-- Электронная почта -->
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Электронная почта</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Введите email"
+                                        required>
+                                </div>
+                                <!-- Регистрация -->
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="registerCheck">
+                                    <label class="form-check-label" for="registerCheck">Зарегистрироваться</label>
+                                </div>
+                                <!-- Поля для регистрации -->
+                                <div id="registrationFields" class="d-none">
+                                    <!-- Пароль -->
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Пароль</label>
+                                        <input type="password" class="form-control text-light border-light"
+                                            id="password" placeholder="Введите пароль" required>
+                                        <div class="form-text text-muted">
+                                            Пароль должен содержать:
+                                            <ul id="passwordHints" class="list-unstyled">
+                                                <li id="length" class="text-danger">Не менее 7 символов</li>
+                                                <li id="number" class="text-danger">Хотя бы 1 цифру</li>
+                                                <li id="uppercase" class="text-danger">Хотя бы 1 заглавную букву</li>
+                                                <li id="lowercase" class="text-danger">Хотя бы 1 строчную букву</li>
+                                                <li id="latinOnly" class="text-danger">Только латинские буквы и цифры
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="invalid-feedback">Используйте указанный формат.</div>
+                                    </div>
+                                    <!-- Подтверждение пароля -->
+                                    <div class="mb-3">
+                                        <label for="password_confirmation" class="form-label">Подтверждение
+                                            пароля</label>
+                                        <input type="password" class="form-control text-light border-light"
+                                            id="password_confirmation" placeholder="Повторите пароль" required>
+                                        <div id="confirmError" class="text-danger"></div>
+                                    </div>
+                                </div>
+                                <!-- Вид животного -->
+                                <div class="mb-3">
+                                    <label for="kind" class="form-label">Вид животного</label>
+                                    <input type="text" class="form-control" id="kind" placeholder="Введите вид животного" required>
+                                </div>
+                                <!-- Клеймо -->
+                                <div class="mb-3">
+                                    <label for="mark" class="form-label">Клеймо</label>
+                                    <input type="text" class="form-control" id="mark" placeholder="Введите клеймо">
+                                </div>
+                                <!-- Описание -->
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Описание</label>
+                                    <textarea class="form-control" id="description" rows="3"
+                                        placeholder="Введите описание" required></textarea>
+                                </div>
+                                <!-- Изображения -->
+                                <div class="mb-3">
+                                    <label for="adImages" class="form-label">Изображения объявления</label>
+                                    <input type="file" class="form-control" id="adImages" accept="image/*">
+                                    <small class="form-text text-warning">Можно загрузить до 3 изображений.</small>
+                                    <div class="image-preview mt-2 d-flex gap-2" id="imagePreview"></div>
+                                </div>
+                                <!-- Согласие на обработку данных -->
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="confirm" required>
+                                    <label class="form-check-label" for="confirm">Согласен на обработку персональных
+                                        данных</label>
+                                    <div class="invalid-feedback">Необходимо согласие на обработку данных.</div>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Опубликовать объявление</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <!-- О нас -->
+                <div class="col-md-4 mb-4">
+                    <h5 class="fw-bold">О нас</h5>
+                    <p class="small">
+                        GET PET BACK — платформа для помощи в поиске домашних животных. Мы объединяем владельцев и тех,
+                        кто может помочь вернуть любимца домой.
+                    </p>
+                </div>
+                <!-- Навигация -->
+                <div class="col-md-4 mb-4">
+                    <h5 class="fw-bold">Навигация</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><a href="../index.html" class="text-light text-decoration-none">Главная</a>
+                        </li>
+                        <li class="mb-3"><a href="profile.html" class="text-light text-decoration-none">Личный
+                                кабинет</a></li>
+                        <li class="mb-3"><a href="add_pet.html" class="text-light text-decoration-none">Добавить
+                                объявление</a></li>
+                        <li class="mb-3"><a href="search.html" class="text-light text-decoration-none">Поиск по
+                                объявлениям</a></li>
+                    </ul>
+                </div>
+                <!-- Контакты -->
+                <div class="col-md-4 mb-4">
+                    <h5 class="fw-bold">Контакты</h5>
+                    <p class="small mb-1">
+                        <i class="bi bi-envelope"></i> support@getpetback.com
+                    </p>
+                    <p class="small mb-1">
+                        <i class="bi bi-telephone"></i> +7 (900) 123-45-67
+                    </p>
+                    <div class="d-flex">
+                        <a href="#" class="btn btn-outline-light btn-sm me-2" aria-label="Facebook">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm me-2" aria-label="Twitter">
+                            <i class="bi bi-twitter"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm" aria-label="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center small">
+                GET PET BACK © 2022–2024. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const imagePreview = document.getElementById('imagePreview');
+        const imageFiles = [];
+        const maxImages = 3;
+
+        document.getElementById('adImages').addEventListener('change', function () {
+            const newFiles = Array.from(this.files);
+
+            newFiles.forEach((file) => {
+                if (!file.type.startsWith('image/')) {
+                    alert(`Файл "${file.name}" не является изображением.`);
+                    return;
+                }
+
+                if (imageFiles.length + newFiles.length > maxImages) {
+                    alert(`Вы можете загрузить не более ${maxImages} изображений.`);
+                    return;
+                }
+
+                if (imageFiles.length < maxImages) {
+                    imageFiles.push(file);
+
+                    const imgWrapper = document.createElement('div');
+                    imgWrapper.classList.add('position-relative');
+
+                    const img = document.createElement('img');
+                    img.src = URL.createObjectURL(file);
+                    img.classList.add('img-thumbnail', 'me-2');
+                    img.style.width = '100px';
+
+                    const removeButton = document.createElement('button');
+                    removeButton.classList.add('btn', 'btn-danger', 'btn-sm', 'position-absolute');
+                    removeButton.style.top = '0';
+                    removeButton.style.right = '0';
+                    removeButton.innerHTML = '<i class="bi bi-x"></i>';
+                    removeButton.addEventListener('click', () => {
+                        const index = imageFiles.indexOf(file);
+                        if (index > -1) {
+                            imageFiles.splice(index, 1);
+                            imagePreview.removeChild(imgWrapper);
+                        }
+                    });
+
+                    imgWrapper.appendChild(img);
+                    imgWrapper.appendChild(removeButton);
+                    imagePreview.appendChild(imgWrapper);
+                }
+            });
+        });
+
+        document.getElementById('adForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const authModal = new bootstrap.Modal(document.getElementById('authModal'));
+            authModal.show();
+
+            document.getElementById('confirmPublish').addEventListener('click', () => {
+                alert('Объявление успешно опубликовано!');
+                authModal.hide();
+                // Дополнительная логика для отправки данных на сервер
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/inputmask/dist/inputmask.min.js"></script>
+    <script src="../scripts/phoneMask.js"></script>
+    <script src="../scripts/passwordValidation.js"></script>
+    <script src="../scripts/samePasswordValidation.js"></script>
+    <script>
+        const form = document.getElementById('adForm');
+        const registerCheck = document.getElementById('registerCheck');
+        const registrationFields = document.getElementById('registrationFields');
+        const password = document.getElementById('password');
+        const passwordConfirmation = document.getElementById('password_confirmation');
+
+        // Показ/скрытие полей регистрации
+        registerCheck.addEventListener('change', () => {
+            if (registerCheck.checked) {
+                registrationFields.classList.remove('d-none');
+                password.required = true;
+                passwordConfirmation.required = true;
+            } else {
+                registrationFields.classList.add('d-none');
+                password.required = false;
+                passwordConfirmation.required = false;
+            }
+        });
+
+        // Валидация формы
+        form.addEventListener('submit', (event) => {
+            const errors = [];
+            // Проверка совпадения паролей
+            if (registerCheck.checked && password.value !== passwordConfirmation.value) {
+                errors.push('Пароли не совпадают.');
+            }
+            if (errors.length > 0) {
+                event.preventDefault();
+                alert(errors.join('\n'));
+            }
+        });
+    </script>
+</body>
+
+</html>

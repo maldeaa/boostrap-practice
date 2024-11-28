@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <title>Поиск по объявлениям</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg px-3 sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="../index.html">
+                <img src="../media/svgs/logo.svg" alt="logo" class="me-2">
+                <span class="logo-text">GET PET BACK</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Главная</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.html">Личный кабинет</a></li>
+                    <li class="nav-item"><a class="nav-link" href="add_pet.html">Добавить объявление</a></li>
+                    <li class="nav-item"><a class="nav-link disabled" href="search.html">Поиск по объявлениям</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="py-5">
+        <div class="container">
+            <h3 class="text-center primary mb-4">Поиск по объявлениям</h3>
+            <form class="row g-3 mb-5" id="searchForm">
+                <div class="col-md-6">
+                    <label for="area" class="form-label">Район</label>
+                    <input type="text" class="form-control" id="area" placeholder="Введите район">
+                </div>
+                <div class="col-md-6">
+                    <label for="type" class="form-label">Вид животного</label>
+                    <input type="text" class="form-control" id="type" placeholder="Введите вид животного">
+                </div>
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary">Найти</button>
+                </div>
+            </form>
+
+            <!-- Карточки объявлений -->
+            <div class="row" id="results">
+                <!-- Пример карточек -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="../media/images/pets/собака.jpg" class="card-img-top" alt="Собака">
+                        <div class="card-body">
+                            <h5 class="card-title text-truncate">Найдена собака</h5>
+                            <p class="card-text text-truncate">Рыжая собака была утеряна в Красногвардейском районе.</p>
+                            <p class="text-truncate"><strong>Район:</strong> Красногвардейский</p>
+                            <p class="text-truncate"><strong>Дата:</strong> 25 ноября 2024</p>
+                            <div class="ad-buttons">
+                                <button class="btn btn-redact" data-bs-toggle="modal"
+                                    data-bs-target="#editAdModal">Подробнее</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="../media/images/pets/кошка.jpg" class="card-img-top" alt="Кошка">
+                        <div class="card-body">
+                            <h5 class="card-title text-truncate">Найдена кошка</h5>
+                            <p class="card-text text-truncate">Потерялась пушистая серая кошка, ласковая и игривая.</p>
+                            <p class="text-truncate"><strong>Район:</strong> Центральный</p>
+                            <p class="text-truncate"><strong>Дата:</strong> 24 ноября 2024</p>
+                            <div class="ad-buttons">
+                                <button class="btn btn-redact" data-bs-toggle="modal"
+                                    data-bs-target="#editAdModal">Подробнее</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Пагинация -->
+            <nav aria-label="Page navigation" class="mt-4">
+                <ul class="pagination pagination-dark justify-content-center mb-0">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Предыдущая</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Следующая</a>
+                    </li>
+                </ul>
+            </nav>            
+        </div>
+    </main>
+
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <!-- О нас -->
+                <div class="col-md-4 mb-4">
+                    <h5 class="fw-bold">О нас</h5>
+                    <p class="small">
+                        GET PET BACK — платформа для помощи в поиске домашних животных. Мы объединяем владельцев и тех,
+                        кто может помочь вернуть любимца домой.
+                    </p>
+                </div>
+                <!-- Навигация -->
+                <div class="col-md-4 mb-4">
+                    <h5 class="fw-bold">Навигация</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><a href="../index.html" class="text-light text-decoration-none">Главная</a>
+                        </li>
+                        <li class="mb-3"><a href="profile.html" class="text-light text-decoration-none">Личный
+                                кабинет</a></li>
+                        <li class="mb-3"><a href="add_pet.html" class="text-light text-decoration-none">Добавить
+                                объявление</a></li>
+                        <li class="mb-3"><a href="search.html" class="text-light text-decoration-none">Поиск по
+                                объявлениям</a></li>
+                    </ul>
+                </div>
+                <!-- Контакты -->
+                <div class="col-md-4 mb-4">
+                    <h5 class="fw-bold">Контакты</h5>
+                    <p class="small mb-1">
+                        <i class="bi bi-envelope"></i> support@getpetback.com
+                    </p>
+                    <p class="small mb-1">
+                        <i class="bi bi-telephone"></i> +7 (900) 123-45-67
+                    </p>
+                    <div class="d-flex">
+                        <a href="#" class="btn btn-outline-light btn-sm me-2" aria-label="Facebook">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm me-2" aria-label="Twitter">
+                            <i class="bi bi-twitter"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm" aria-label="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center small">
+                GET PET BACK © 2022–2024. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
