@@ -64,9 +64,12 @@
                             <h5 class="card-title">Имя пользователя: Иван Иванов</h5>
                             <p>Дата регистрации: <span id="dateOfReg">2024-11-15</span></p>
                             <p id="daysSinceReg">Дней с момента регистрации: <span id="registrationDate">0</span></p>
-                            <button class="btn btn-primary me-2" data-bs-toggle="modal"
-                                data-bs-target="#editUserModal">Изменить информацию</button>
-                                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exitModal">Выйти из аккаунта</button>
+                            <div class="d-flex flex-column flex-sm-row gap-2">
+                                <button class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#editUserModal">Изменить информацию</button>
+                                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exitModal">Выйти
+                                    из аккаунта</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -127,11 +130,13 @@
                         </div>
                         <div class="mb-3">
                             <label for="userEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="userEmail" value="ivan@example.com" placeholder="Введите email" required>
+                            <input type="email" class="form-control" id="userEmail" value="ivan@example.com"
+                                placeholder="Введите email" required>
                         </div>
                         <div class="mb-3">
                             <label for="userPhone" class="form-label">Телефон</label>
-                            <input type="text" class="form-control" id="phone" value="+7 (999) 123-45-67" placeholder="+7 (___) ___ __-__" required>
+                            <input type="text" class="form-control" id="phone" value="+7 (999) 123-45-67"
+                                placeholder="+7 (___) ___ __-__" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Сохранить изменения</button>
                     </form>
@@ -193,24 +198,24 @@
         </div>
     </div>
 
-        <!-- Модальное окно для выхода из аккаунта -->
-        <div class="modal fade" id="exitModal" tabindex="-1" aria-labelledby="exitModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exitModal">Выйти из аккаунта</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Вы уверены, что хотите выйти из аккаунта?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
-                        <button type="button" class="btn btn-danger">Выйти</button>
-                    </div>
+    <!-- Модальное окно для выхода из аккаунта -->
+    <div class="modal fade" id="exitModal" tabindex="-1" aria-labelledby="exitModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exitModal">Выйти из аккаунта</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Вы уверены, что хотите выйти из аккаунта?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
+                    <button type="button" class="btn btn-danger">Выйти</button>
                 </div>
             </div>
         </div>
+    </div>
 
     <footer class="bg-dark text-light py-4 mt-5">
         <div class="container">
@@ -282,85 +287,85 @@
             document.getElementById('registrationDate').textContent = daysSinceRegistration;
         };
     </script>
-<script>
-    const imagePreview = document.getElementById('imagePreview');
-    const imageFiles = [];
-    const maxImages = 3;
+    <script>
+        const imagePreview = document.getElementById('imagePreview');
+        const imageFiles = [];
+        const maxImages = 3;
 
-    document.getElementById('adImages').addEventListener('change', function () {
-        const newFiles = Array.from(this.files);
-        document.getElementById('adImages').value = '';
-        
-        newFiles.forEach((file) => {
-            if (!file.type.startsWith('image/')) {
-                alert(`Файл "${file.name}" не является изображением.`);
-                return;
-            }
+        document.getElementById('adImages').addEventListener('change', function () {
+            const newFiles = Array.from(this.files);
+            document.getElementById('adImages').value = '';
 
-            if (imageFiles.length + newFiles.length > maxImages) {
-                alert(`Вы можете загрузить не более ${maxImages} изображений.`);
-                return;
-            }
+            newFiles.forEach((file) => {
+                if (!file.type.startsWith('image/')) {
+                    alert(`Файл "${file.name}" не является изображением.`);
+                    return;
+                }
 
-            if (imageFiles.length < maxImages) {
-                imageFiles.push(file);
+                if (imageFiles.length + newFiles.length > maxImages) {
+                    alert(`Вы можете загрузить не более ${maxImages} изображений.`);
+                    return;
+                }
 
-                const imgWrapper = document.createElement('div');
-                imgWrapper.classList.add('position-relative');
+                if (imageFiles.length < maxImages) {
+                    imageFiles.push(file);
 
-                const img = document.createElement('img');
-                img.src = URL.createObjectURL(file);
-                img.classList.add('img-thumbnail', 'me-2');
-                img.style.width = '100px';
+                    const imgWrapper = document.createElement('div');
+                    imgWrapper.classList.add('position-relative');
 
-                const removeButton = document.createElement('button');
-                removeButton.classList.add('btn', 'btn-danger', 'btn-sm', 'position-absolute');
-                removeButton.style.top = '0';
-                removeButton.style.right = '0';
-                removeButton.innerHTML = '<i class="bi bi-x"></i>';
-                removeButton.addEventListener('click', () => {
-                    const index = imageFiles.indexOf(file);
-                    if (index > -1) {
-                        imageFiles.splice(index, 1);
-                        imagePreview.removeChild(imgWrapper);
-                    }
-                });
+                    const img = document.createElement('img');
+                    img.src = URL.createObjectURL(file);
+                    img.classList.add('img-thumbnail', 'me-2');
+                    img.style.width = '100px';
 
-                imgWrapper.appendChild(img);
-                imgWrapper.appendChild(removeButton);
-                imagePreview.appendChild(imgWrapper);
-            }
+                    const removeButton = document.createElement('button');
+                    removeButton.classList.add('btn', 'btn-danger', 'btn-sm', 'position-absolute');
+                    removeButton.style.top = '0';
+                    removeButton.style.right = '0';
+                    removeButton.innerHTML = '<i class="bi bi-x"></i>';
+                    removeButton.addEventListener('click', () => {
+                        const index = imageFiles.indexOf(file);
+                        if (index > -1) {
+                            imageFiles.splice(index, 1);
+                            imagePreview.removeChild(imgWrapper);
+                        }
+                    });
+
+                    imgWrapper.appendChild(img);
+                    imgWrapper.appendChild(removeButton);
+                    imagePreview.appendChild(imgWrapper);
+                }
+            });
         });
-    });
 
-    document.getElementById('adForm').addEventListener('submit', function (event) {
-        event.preventDefault();
+        document.getElementById('adForm').addEventListener('submit', function (event) {
+            event.preventDefault();
 
-        const authModal = new bootstrap.Modal(document.getElementById('authModal'));
-        authModal.show();
+            const authModal = new bootstrap.Modal(document.getElementById('authModal'));
+            authModal.show();
 
-        document.getElementById('confirmPublish').addEventListener('click', () => {
-            alert('Объявление успешно изменено!');
-            authModal.hide();
-            // Дополнительная логика для отправки данных на сервер
+            document.getElementById('confirmPublish').addEventListener('click', () => {
+                alert('Объявление успешно изменено!');
+                authModal.hide();
+                // Дополнительная логика для отправки данных на сервер
+            });
         });
-    });
-</script>
-<script>
-    function adjustMainPadding() {
-      const navbar = document.querySelector('nav');
-      const main = document.querySelector('main');
-      
-      if (navbar && main) {
-        const navbarHeight = navbar.offsetHeight + 30;
-        main.style.paddingTop = `${navbarHeight}px`;
-      }
-    }
+    </script>
+    <script>
+        function adjustMainPadding() {
+            const navbar = document.querySelector('nav');
+            const main = document.querySelector('main');
 
-    document.addEventListener('DOMContentLoaded', adjustMainPadding);
+            if (navbar && main) {
+                const navbarHeight = navbar.offsetHeight + 30;
+                main.style.paddingTop = `${navbarHeight}px`;
+            }
+        }
 
-    window.addEventListener('resize', adjustMainPadding);
-  </script>
+        document.addEventListener('DOMContentLoaded', adjustMainPadding);
+
+        window.addEventListener('resize', adjustMainPadding);
+    </script>
 </body>
 
 </html>
