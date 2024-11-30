@@ -338,7 +338,7 @@
             });
         });
 
-        document.getElementById('adForm').addEventListener('submit', function (event) {
+        document.getElementById('adForm')?.addEventListener('submit', function (event) {
             event.preventDefault();
 
             const authModal = new bootstrap.Modal(document.getElementById('authModal'));

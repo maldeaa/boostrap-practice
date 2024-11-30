@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    registerForm.addEventListener("submit", function (e) {
+    registerForm?.addEventListener("submit", function (e) {
         checkPasswordsMatch();
         if (confirmPasswordField.classList.contains("is-invalid")) {
             e.preventDefault();
