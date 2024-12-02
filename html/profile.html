@@ -351,21 +351,6 @@
             });
         });
     </script>
-    <script>
-        function adjustMainPadding() {
-            const navbar = document.querySelector('nav');
-            const main = document.querySelector('main');
-
-            if (navbar && main) {
-                const navbarHeight = navbar.offsetHeight + 30;
-                main.style.paddingTop = `${navbarHeight}px`;
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', adjustMainPadding);
-
-        window.addEventListener('resize', adjustMainPadding);
-    </script>
 </body>
 
 </html>

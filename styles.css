@@ -78,6 +78,11 @@ nav {
     backdrop-filter: blur(15px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
     z-index: 1000;
+    min-height: 90px;
+}
+
+main {
+    margin-top: calc(90px + 25px);
 }
 
 .navbar-brand img {
